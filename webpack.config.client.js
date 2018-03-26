@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const resolve = require('path').resolve
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: './index',
@@ -10,18 +10,10 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/dist/'
   },
-  devtool: 'source-map',
+  watch: true,
+  devtool: 'inline-source-map',
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
+    new webpack.NoEmitOnErrorsPlugin(),
     new ExtractTextPlugin('style.css')
   ],
   module: {
@@ -32,7 +24,7 @@ module.exports = {
         loaders: "babel-loader",
         include: __dirname,
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react', 'react-hmre']
         }
       },
       {
