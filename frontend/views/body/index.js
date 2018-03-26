@@ -1,7 +1,11 @@
 require('./_body.scss');
 
-import React from "react";
+import React from 'react';
 
-const Body = () => <div className="body">This is body page.</div>;
+class Body extends React.Component {
+  render() {
+    return <h1>Hello</h1>
+  }
+}
 
 export default Body;

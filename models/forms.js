@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
 
 var formsSchema = mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  birthday: Date
+  name: String,
+  title: String,
+  type: {type: String, default: 'object'},
+  required: Array,
+  properties: Object
 }, {
   strict: false
 });

@@ -20,12 +20,19 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: "babel-loader",
-        include: __dirname,
-        query: {
-          presets: ['es2015', 'react', 'react-hmre']
-        }
+        include: [
+          resolve(__dirname, 'index.js'),
+          resolve(__dirname, 'frontend'),
+        ],
+        options: {
+          cacheDirectory: true,
+          presets: [
+            'es2015',
+            'react',
+            'stage-0'
+          ]
+        },
+        loader: 'babel-loader'
       },
       {
         test: /\.scss$/,

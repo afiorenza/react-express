@@ -6,10 +6,6 @@ import Body from './views/body';
 import Dev from './views/dev';
 
 const App = () => <div>
-  <div>
-    I am the header
-    <Link to='/dev'>Route to dev</Link>
-  </div>
   <main>
     <Switch>
       <Route exact path='/' component={Body}/>
