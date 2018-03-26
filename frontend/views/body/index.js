@@ -3,7 +3,7 @@ require('./_body.scss');
 import React, {Component} from 'react';
 import Form from 'react-jsonschema-form';
 import {omit} from 'lodash';
-
+import AddField from './add-field';
 class Body extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +36,8 @@ class Body extends Component {
         />
         <br />
         {message && <p>{message}</p>}
+        <br />
+        <AddField onFormFetch={form => this.handleFormChange(form)} />
       </div>
     );
   }
@@ -56,6 +58,12 @@ class Body extends Component {
       this.setState({
         message
       });
+    });
+  }
+
+  handleFormChange(form) {
+    this.setState({
+      schema: omit(form, ['_id', '_v'])
     });
   }
 }

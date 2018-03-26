@@ -42,7 +42,7 @@ router.post('/forms', (req, res) => {
 
 router.post('/add-field', (req, res) => {
   let {key, type, title, defaultValue} = req.body;
-
+  
   Form.findOne({name: 'default'}, (error, form) => {
     let {properties} = form;
     form.properties = Object.assign({}, properties, {
