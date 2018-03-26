@@ -18,7 +18,7 @@ const connect = () => {
 
           defaultForm.name = 'default';
           defaultForm.title = 'Test form';
-          defaultForm.required = [];
+          defaultForm.required = ['lastName'];
           defaultForm.properties = {
             firstName: {
               type: 'string',
