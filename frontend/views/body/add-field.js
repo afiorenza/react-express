@@ -6,7 +6,9 @@ export class AddField extends Component {
     super(props);
 
     this.state = {
-      form: {}
+      form: {
+        type: 'string'
+      }
     };
   }
 
@@ -16,11 +18,16 @@ export class AddField extends Component {
         <label htmlFor="key">
           <span>Key</span>
           <input type="text" name="key" onChange={e => this.handleChange(e, 'key')} />
-        </label>
+        </label>      
 
         <label htmlFor="type">
           <span>Type</span>
-          <input type="text" name="type" onChange={e => this.handleChange(e, 'type')} />
+          <select name="type" onChange={e => this.handleChange(e, 'type')} >
+            <option value="string">string</option>
+            <option value="number">number</option>
+            <option value="integer">integer</option>
+            <option value="boolean">boolean</option>
+          </select>
         </label>
 
         <label htmlFor="title">
