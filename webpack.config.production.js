@@ -1,13 +1,13 @@
 const webpack = require('webpack');
 const path = require('path');
-const resolve = require('path').resolve
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './index',
+  entry: './frontend/index.js',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].[hash].js',
     publicPath: '/dist/'
   },
   devtool: 'source-map',
@@ -22,38 +22,45 @@ module.exports = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('[name].[hash].css'),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'frontend/index.html')
+    })
   ],
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: "babel-loader",
+        loaders: 'babel-loader',
         include: __dirname,
         query: {
-          presets: ['es2015', 'react']
+          presets: [
+            'es2015',
+            'react',
+            'stage-0'
+          ]
         }
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: ExtractTextPlugin.extract({
           use: [
             'css-loader?sourceMap',
-            `sass-loader?sourceMapContents=true`,
+            'sass-loader?sourceMapContents=true',
             'postcss-loader'
           ]
         })
       },
       {
-        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        test: /\.(png|ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader'
       }
     ]
   },
   resolve: {
     alias: {},
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx', '.css', '.scss'],
     modules: [
       'src',
       'node_modules'

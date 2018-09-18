@@ -1,9 +1,18 @@
 require('./_index.scss');
 
 import React from 'react';
-import {Switch, Route, Link} from 'react-router-dom';
+import {render} from 'react-dom';
+import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 import Body from './views/body';
 import Dev from './views/dev';
+
+if (process.env.NODE_ENV !== 'production') {
+  let script = document.createElement('script');
+
+  script.setAttribute('src', 'http://localhost:35729/livereload.js');
+
+  document.body.appendChild(script);
+}
 
 const App = () => <div>
   <main>
@@ -14,4 +23,8 @@ const App = () => <div>
   </main>
 </div>;
 
-export default App;
+render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+), document.getElementById('root'));
