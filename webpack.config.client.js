@@ -4,6 +4,7 @@ const resolve = require('path').resolve;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: './frontend/index.js',
@@ -15,6 +16,12 @@ module.exports = {
   watch: true,
   devtool: 'inline-source-map',
   plugins: [
+    new CleanWebpackPlugin([path.join(__dirname, 'dist')], {
+      dry: false,
+      exclude: ['index.html'],
+      verbose: true,
+      watch: true
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new ExtractTextPlugin('[name].[hash].css'),
     new HtmlWebpackPlugin({
